@@ -96,23 +96,44 @@ int searchEmployee(int &count,int key,int &index){
 }
 void printPayslip(int &count,int id){
     int i=0;
+    fstream fout;
+    fout.open("paid.txt",ios::app);
     if(searchEmployee(count, id, i)==-1){
         cout<<"PLEASE READ FROM THE FILE FIRST"<<endl;
     }else if(searchEmployee(count,id,i)==0){
         cout<<"COULDN'T FIND EMPLOYEE ID: "<<id;
     }else{
+        ifstream fin;
+        fin.open("paid.txt");
+        string n,a;
+        int paid;
+        int found=0;
+        float s,all,tx,fsal;
+        while(fin>>paid>>n>>a>>s>>all>>tx>>fsal){
+            if(paid==t[i].empid){
+                found = 1;
+                break;
+            }
+        }
+        fin.close();
         int width=60;
-        cout<<endl<<endl;
-        
-        cout<<"\t\t\t+-----------------------------------PAYSLIP---------------------------------+\t\t\t\t\t\t\t\t"<<endl;
-        cout<<"\t\t\t| Emloyee ID:"<<t[i].empid<<setw(25)<<"Name:"<<t[i].name
+        if(found==0){
+            fstream fout;
+            fout.open("paid.txt",ios::app);
+            cout<<endl<<endl;
+            cout<<"\t\t\t+-----------------------------------PAYSLIP---------------------------------+\t\t\t\t\t\t\t\t"<<endl;
+            cout<<"\t\t\t| Emloyee ID:"<<t[i].empid<<setw(25)<<"Name:"<<t[i].name
             <<setw(20)<<"Address:"<<t[i].address<<setw(2)<<"|"<<endl;
-        cout<<"\t\t\t|---------------------------------------------------------------------------|"<<endl;
-        cout<<"\t\t\t| Salary:"<<t[i].bsalary<<setw(63)<<" |"<<endl;
-        cout<<"\t\t\t| Allowance:"<<t[i].allowance<<setw(61)<<" |"<<endl;
-        cout<<"\t\t\t| Tax:"<<t[i].tax<<setw(67)<<" |"<<endl;
-        cout<<"\t\t\t| ------------------                                                        |"<<endl;
-        cout<<"\t\t\t| Net Salary:"<<t[i].fsalary<<setw(59)<<" |"<<endl;
-        cout<<"\t\t\t+---------------------------------------------------------------------------+\t\t\t\t\t\t\t\t"<<endl;
+            cout<<"\t\t\t|---------------------------------------------------------------------------|"<<endl;
+            cout<<"\t\t\t| Salary:"<<t[i].bsalary<<setw(63)<<" |"<<endl;
+            cout<<"\t\t\t| Allowance:"<<t[i].allowance<<setw(61)<<" |"<<endl;
+            cout<<"\t\t\t| Tax:"<<t[i].tax<<setw(67)<<" |"<<endl;
+            cout<<"\t\t\t| ------------------                                                        |"<<endl;
+            cout<<"\t\t\t| Net Salary:"<<t[i].fsalary<<setw(59)<<" |"<<endl;
+            cout<<"\t\t\t+---------------------------------------------------------------------------+\t\t\t\t\t\t\t\t"<<endl;
+            fout<<t[i].empid<<" "<<t[i].name<<" "<<t[i].address<<" "<<t[i].bsalary<<" "<<t[i].allowance<<" "<<t[i].tax<<" "<<t[i].fsalary<<endl;
+        }else{
+            cout<<"Employee id with "<<paid<<" has already taken salary"<<endl;
+        }
     }
 }

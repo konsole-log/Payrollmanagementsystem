@@ -1,4 +1,0 @@
-11 Anush Kharibot 24000 480 240 24240
-12 Alisha Chhetrapati 36000 720 360 36360
-13 Gaurav Kapaan 4800 96 0 4896
-14 Sangam Goldhunga 4800 96 0 4896
