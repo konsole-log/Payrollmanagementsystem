@@ -53,18 +53,17 @@ public:
     }
     void getData()
     {
-        cout << "Enter empid, name, address, no. of days worked: ";
-        cin >> empid >> name >> address >> days;
+        cout << "Enter empid, name, address, base salary($): ";
+        cin >> empid >> name >> address >> bsalary;
     }
     void calFinalSalary(){
-        bsalary=dailyRate*days;
-        if(bsalary>=20000.00 && bsalary<50000.00)  
+        if(bsalary>=2000.00 && bsalary<5000.00)  
         {
             tax=bsalary*0.01;
-        }else if(bsalary>=50000.00 && bsalary<100000.00)
+        }else if(bsalary>=5000.00 && bsalary<10000.00)
         {
             tax=bsalary*0.03;  
-        }else if(bsalary>=100000.00)
+        }else if(bsalary>=10000.00)
         {
             tax=bsalary*0.05;
         }else

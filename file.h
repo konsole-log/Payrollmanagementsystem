@@ -72,9 +72,7 @@ void list(int size){
     cout<<setw(col6)<<"Tax"<<" |";
     cout<<setw(col7)<<"Net Salary"<<" |";
     cout<<endl;
-    cout<<"\t\t+";
-    for(int j=0;j<95;j++)cout<<"-";
-    cout<<"+"<<endl;
+    drawline(95);
     for(int i=0;i<size;i++){
         t[i].showData();
     }
@@ -133,10 +131,10 @@ void printPayslip(int &count,int id){
             cout<<"\t\t|"<<left<<setw(col1+10)<<"Allowance"<<right<<setw(width-(col1+10))<<t[i].allowance<<"|\n";
             cout<<"\t\t|"<<left<<setw(col1+10)<<"Tax"<<right<<setw(width-(col1+10))<<t[i].tax<<"|\n";
             drawline(width);
-            cout<<"\t\t|"<<right<<setw(width-(col1-7))<<"TOTAL:"<<t[i].fsalary<<"|\n";
+            cout<<"\t\t "<<right<<setw(width-(col1-5))<<"TOTAL:"<<t[i].fsalary<<"\n";
             drawline(width);
 
-            // fout<<t[i].empid<<" "<<t[i].name<<" "<<t[i].address<<" "<<t[i].bsalary<<" "<<t[i].allowance<<" "<<t[i].tax<<" "<<t[i].fsalary<<endl;
+            fout<<t[i].empid<<" "<<t[i].name<<" "<<t[i].address<<" "<<t[i].bsalary<<" "<<t[i].allowance<<" "<<t[i].tax<<" "<<t[i].fsalary<<endl;
         }else{
             cout<<"Employee id with "<<paid<<" has already taken salary"<<endl;
         }
