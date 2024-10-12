@@ -17,7 +17,6 @@ void readFromFile(int &count){
     cout<<count<<" records read from the database"<<endl;
     fin.close();
 }
-
 bool isFileEmpty(const string& filename) {
     ifstream file(filename, ios::binary | ios::ate); // Open file in binary mode and move to the end
     if (!file) {
@@ -26,7 +25,6 @@ bool isFileEmpty(const string& filename) {
     }
     return file.tellg() == 0;  // Check if file size is 0
 }
-
 void saveToFile(int size,char mode)
 {
     fstream fout;
@@ -53,16 +51,18 @@ void saveToFile(int size,char mode)
     }
     fout.close();
 }
-
+void drawline(int len){
+    cout<<"\t\t+";
+    for(int i=1;i<=len;i++)cout<<"-";
+    cout<<"+\n";
+}
 void list(int size){
     if(size==0){
         cout<<"ERROR!!seems like you are trying to list without reading from database.";
         return;
     }
     cout<<"\t\t\t\t\t\t\tEMPLOYEE DETAILS"<<endl;
-    cout<<"\t\t+";
-    for(int j=0;j<95;j++)cout<<"-";
-    cout<<"+"<<endl;
+    drawline(95);
     cout<<left;
     cout<<"\t\t| "<<setw(col1)<<"Employee ID"<<" |";
     cout<<setw(col2)<<"Name"<<" |";
@@ -78,9 +78,7 @@ void list(int size){
     for(int i=0;i<size;i++){
         t[i].showData();
     }
-    cout<<"\t\t+";
-    for(int j=0;j<95;j++)cout<<"-";
-    cout<<"+"<<endl;
+    drawline(95);
 }
 int searchEmployee(int &count,int key,int &index){
     if(count==0){
@@ -94,6 +92,7 @@ int searchEmployee(int &count,int key,int &index){
     }
     return 0;
 }
+
 void printPayslip(int &count,int id){
     int i=0;
     fstream fout;
@@ -116,22 +115,28 @@ void printPayslip(int &count,int id){
             }
         }
         fin.close();
-        int width=60;
+        int width=80;
         if(found==0){
             fstream fout;
             fout.open("paid.txt",ios::app);
-            cout<<endl<<endl;
-            cout<<"\t\t\t+-----------------------------------PAYSLIP---------------------------------+\t\t\t\t\t\t\t\t"<<endl;
-            cout<<"\t\t\t| Emloyee ID:"<<t[i].empid<<setw(25)<<"Name:"<<t[i].name
-            <<setw(20)<<"Address:"<<t[i].address<<setw(2)<<"|"<<endl;
-            cout<<"\t\t\t|---------------------------------------------------------------------------|"<<endl;
-            cout<<"\t\t\t| Salary:"<<t[i].bsalary<<setw(63)<<" |"<<endl;
-            cout<<"\t\t\t| Allowance:"<<t[i].allowance<<setw(61)<<" |"<<endl;
-            cout<<"\t\t\t| Tax:"<<t[i].tax<<setw(67)<<" |"<<endl;
-            cout<<"\t\t\t| ------------------                                                        |"<<endl;
-            cout<<"\t\t\t| Net Salary:"<<t[i].fsalary<<setw(59)<<" |"<<endl;
-            cout<<"\t\t\t+---------------------------------------------------------------------------+\t\t\t\t\t\t\t\t"<<endl;
-            fout<<t[i].empid<<" "<<t[i].name<<" "<<t[i].address<<" "<<t[i].bsalary<<" "<<t[i].allowance<<" "<<t[i].tax<<" "<<t[i].fsalary<<endl;
+            cout<<endl;
+            cout<<"\t\t\t\t\t\t"<<"PAYSLIP"<<endl;
+            drawline(width);
+            cout<<right;
+            cout<<"\t\t  "<<setw(col1+5)<<"Employee ID: "<<t[i].empid<<right<<endl;
+            cout<<"\t\t  "<<setw(col1+5)<<"Employee Name: "<<t[i].name<<endl;
+            cout<<"\t\t  "<<setw(col1+5)<<"Address: "<<t[i].address<<endl;
+            drawline(width);
+            cout<<"\t\t|"<<left<<setw(col1+5)<<"Earnings"<<right<<setw(width-(col1+4))<<"Amount|"<<endl;
+            drawline(width);
+            cout<<"\t\t|"<<left<<setw(col1+10)<<"Base Salary"<<right<<setw(width-(col1+10))<<t[i].bsalary<<"|\n";
+            cout<<"\t\t|"<<left<<setw(col1+10)<<"Allowance"<<right<<setw(width-(col1+10))<<t[i].allowance<<"|\n";
+            cout<<"\t\t|"<<left<<setw(col1+10)<<"Tax"<<right<<setw(width-(col1+10))<<t[i].tax<<"|\n";
+            drawline(width);
+            cout<<"\t\t|"<<right<<setw(width-(col1-7))<<"TOTAL:"<<t[i].fsalary<<"|\n";
+            drawline(width);
+
+            // fout<<t[i].empid<<" "<<t[i].name<<" "<<t[i].address<<" "<<t[i].bsalary<<" "<<t[i].allowance<<" "<<t[i].tax<<" "<<t[i].fsalary<<endl;
         }else{
             cout<<"Employee id with "<<paid<<" has already taken salary"<<endl;
         }
