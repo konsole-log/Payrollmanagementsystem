@@ -133,7 +133,7 @@ void printPayslip(int &count,int id){
             drawline(width);
             cout<<"\t\t "<<right<<setw(width-(col1-5))<<"TOTAL:"<<t[i].fsalary<<"\n";
             drawline(width);
-
+            cout<<"Employee with "<<id<<" has been paid salary"<<endl;
             fout<<t[i].empid<<" "<<t[i].name<<" "<<t[i].address<<" "<<t[i].bsalary<<" "<<t[i].allowance<<" "<<t[i].tax<<" "<<t[i].fsalary<<endl;
         }else{
             cout<<"Employee id with "<<paid<<" has already taken salary"<<endl;
